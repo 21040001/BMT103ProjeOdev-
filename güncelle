@@ -1,0 +1,8 @@
+#include <stdio.h>
+void güncelle(){
+    int saat,dakika,y_saat,y_dakika;
+    char eylem,y_eylem;
+    y_saat=saat;
+    y_dakika=dakika;
+    y_eylem=eylem;
+}
