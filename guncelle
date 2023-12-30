@@ -1,0 +1,38 @@
+void guncelle(){
+    FILE* geciciDosya = fopen("C:\\Users\\rizay\\OneDrive\\dosyaa91.txt", "w");
+    FILE* dosya = fopen("C:\\Users\\rizay\\OneDrive\\dosyaa41.txt", "r+");
+    if (dosya == NULL) {
+        printf("Dosya acilamadi!");
+        return 1;
+    }
+    int okunansaat;
+    char okunaneylem[100];
+    char satir[100];
+    int saat;
+    char yeni_eylem[50];
+
+    printf("Lutfen degistirmek istediginiz eylemin saatini girin: ");
+    scanf("%d", &saat);
+
+    printf("Lutfen yeni eylem girin: ");
+    scanf(" %[^\n]", yeni_eylem);
+
+    while (fgets(satir, sizeof(satir), dosya) != NULL) {
+        sscanf(satir, "%d %[^\n]", &okunansaat, okunaneylem);
+
+        if (saat == okunansaat) {
+            fprintf(geciciDosya, "%d %s\n", saat, yeni_eylem);
+        } else {
+            fprintf(geciciDosya, "%d %s\n", okunansaat, okunaneylem);
+        }
+    }
+
+    fclose(geciciDosya);
+    fclose(dosya);
+
+    remove("C:\\Users\\rizay\\OneDrive\\dosyaa41.txt");
+    rename("C:\\Users\\rizay\\OneDrive\\dosyaa91.txt", "C:\\Users\\rizay\\OneDrive\\dosyaa41.txt");
+
+    printf("eylem basariyla degistirildi!");
+
+}
