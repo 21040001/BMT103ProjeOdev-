@@ -1,0 +1,11 @@
+#include "stdio.h"
+#include <string.h>
+void silme(){
+    FILE  *dosya = fopen("eylemler.txt", "w");  // dosyayı yazma momutuyla açtım
+    if(dosya != NULL){
+        fclose(dosya); // dosyayı kapattığımda dosya içeriği silinir
+        printf("Dosya icerigi silindi");
+    }
+    else
+        printf("Dosya acilamadi"); // dosya açılmazsa bu hatra mesaj ekrana yazılacak
+}
