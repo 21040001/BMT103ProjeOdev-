@@ -1,14 +1,14 @@
-void guncelle(){
-    FILE* geciciDosya = fopen("C:\\Users\\rizay\\OneDrive\\dosyaa91.txt", "w");
-    FILE* dosya = fopen("C:\\Users\\rizay\\OneDrive\\dosyaa41.txt", "r+");
+void guncelle() {
+    FILE *geciciDosya = fopen("dosya.txt", "w");
+    FILE *dosya = fopen("eylemler.txt", "r");
     if (dosya == NULL) {
         printf("Dosya acilamadi!");
-        return 1;
+        exit(1);
     }
-    int yenisaat,yenidakika;
+    int yenisaat, yenidakika;
     char yenieylem[100];
     char satir[100];
-    int saat,dakika;
+    int saat, dakika;
     char yeni_eylem[50];
 
     printf("Lutfen degistirmek istediginiz eylemin saatini girin: ");
@@ -17,24 +17,22 @@ void guncelle(){
     scanf("%d", &dakika);
 
     printf("Lutfen yeni eylem girin: ");
-    scanf(" %[^\n]", yeni_eylem);
+    scanf("%s", yeni_eylem);
 
     while (fgets(satir, sizeof(satir), dosya) != NULL) {
-        sscanf(satir, "%d %d %[^\n]", &yenisaat,&yenidakika, yenieylem);
-
-        if (saat == yenisaat && dakika==yenidakika) {
-            fprintf(geciciDosya, "%d:%d => %s\n", saat,dakika, yeni_eylem);
+        sscanf(satir, "%d:%d => %[^\n]", &yenisaat, &yenidakika, yenieylem);
+        if (saat == yenisaat && dakika == yenidakika) {
+            fprintf(geciciDosya, "%d:%d => %s\n", saat, dakika, yeni_eylem);
         } else {
-            fprintf(geciciDosya, "%d:&d => %s\n", yenisaat,yenidakika, yenieylem);
+            fprintf(geciciDosya, "%d:%d => %s\n", yenisaat, yenidakika, yenieylem);
         }
     }
 
     fclose(geciciDosya);
     fclose(dosya);
 
-    remove("C:\\Users\\rizay\\OneDrive\\dosyaa41.txt");
-    rename("C:\\Users\\rizay\\OneDrive\\dosyaa91.txt", "C:\\Users\\rizay\\OneDrive\\dosyaa41.txt");
+    remove("eylemler.txt");
+    rename("dosya.txt", "eylemler.txt");
 
     printf("eylem basariyla degistirildi!");
-
 }
