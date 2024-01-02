@@ -3,6 +3,7 @@
 void ekle();
 void guncelle();
 void gorevler();
+void silme();
 int main(){
     int a;
     while (1){
@@ -22,7 +23,7 @@ int main(){
             guncelle();
             break;
         case 3:
-
+            silme();
             break;
         case 4:
             gorevler();
