@@ -5,25 +5,27 @@ void guncelle(){
         printf("Dosya acilamadi!");
         return 1;
     }
-    int okunansaat;
-    char okunaneylem[100];
+    int yenisaat,yenidakika;
+    char yenieylem[100];
     char satir[100];
-    int saat;
+    int saat,dakika;
     char yeni_eylem[50];
 
     printf("Lutfen degistirmek istediginiz eylemin saatini girin: ");
     scanf("%d", &saat);
+    printf("Lutfen degistirmek istediginiz eylemin dakikasini girin: ");
+    scanf("%d", &dakika);
 
     printf("Lutfen yeni eylem girin: ");
     scanf(" %[^\n]", yeni_eylem);
 
     while (fgets(satir, sizeof(satir), dosya) != NULL) {
-        sscanf(satir, "%d %[^\n]", &okunansaat, okunaneylem);
+        sscanf(satir, "%d %d %[^\n]", &yenisaat,&yenidakika, yenieylem);
 
-        if (saat == okunansaat) {
-            fprintf(geciciDosya, "%d %s\n", saat, yeni_eylem);
+        if (saat == yenisaat && dakika==yenidakika) {
+            fprintf(geciciDosya, "%d:%d => %s\n", saat,dakika, yeni_eylem);
         } else {
-            fprintf(geciciDosya, "%d %s\n", okunansaat, okunaneylem);
+            fprintf(geciciDosya, "%d:&d => %s\n", yenisaat,yenidakika, yenieylem);
         }
     }
 
