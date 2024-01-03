@@ -3,11 +3,14 @@
 #include <process.h>
 #include <stdlib.h>
 
-
+struct gorev{
+    int saat;
+    int dakika;
+    char eylem[30];
+};
 FILE * fileAdres;
 void ekle(){
     struct gorev gorev1;
-    char get_ss[30];
     fileAdres = fopen("eylemler.txt","a+");
 
     printf("Lutfen gorev saati giriniz!! \n");
@@ -27,9 +30,9 @@ void ekle(){
 
 }
 void guncelle() {
-    FILE *geciciDosya = fopen("gecici.txt", "w");//buarada yeni bir dosya açtı
-    FILE *dosya = fopen("eylemler.txt", "r");//burda eylemler dosyasını okudu
-    if (dosya == NULL) {//dosya açılmasa bunu bize bildiriyor
+    FILE *geciciDosya = fopen("dosya.txt", "w");
+    FILE *dosya = fopen("eylemler.txt", "r");
+    if (dosya == NULL) {
         printf("Dosya acilamadi!");
         exit(1);
     }
@@ -37,36 +40,33 @@ void guncelle() {
     char yenieylem[100];
     char satir[100];
     int saat, dakika;
-    char yeni_eylem[50];//kulancağımız diziler ve değişkenleri tanımladım
+    char yeni_eylem[50];
 
-    printf("Lutfen degistirmek istediginiz eylemin saatini girin: ");
+    printf("Lutfen degistirmek istediginiz gorevin saatini girin:\n ");
     scanf("%d", &saat);
-    printf("Lutfen degistirmek istediginiz eylemin dakikasini girin: ");
+    printf("Lutfen degistirmek istediginiz gorevin dakikasini girin:\n ");
     scanf("%d", &dakika);
 
-    printf("Lutfen yeni eylem girin: ");
-    scanf("%s", yeni_eylem);//burada değişkenlere değer atadım
+    printf("Lutfen yeni gorev girin:\n ");
+    scanf("%s", yeni_eylem);
 
     while (fgets(satir, sizeof(satir), dosya) != NULL) {
-        sscanf(satir, "%d:%d => %[^\n]", &yenisaat, &yenidakika, yenieylem);//buarada eylemler dosyasındaki değerleri satır dizisine aktardık
+        sscanf(satir, "%d:%d => %s\n]", &yenisaat, &yenidakika, yenieylem);
         if (saat == yenisaat && dakika == yenidakika) {
-            fprintf(geciciDosya, "%d:%d => %s\n", saat, dakika, yeni_eylem);
+           fprintf(geciciDosya, "%d:%d => %s\n", saat, dakika, yeni_eylem);
         } else {
-            fprintf(geciciDosya, "%d:%d => %s\n", yenisaat, yenidakika, yenieylem);
-            break;//burada değişiklerle birlikte verileri geçici dosyaya kaydettim
+           fprintf(geciciDosya, "%d:%d => %s\n", yenisaat, yenidakika, yenieylem);
         }
     }
 
     fclose(geciciDosya);
-    fclose(dosya);//dosyaları kapatttım
+    fclose(dosya);
 
     remove("eylemler.txt");
-    rename("gecici.txt", "eylemler.txt");//eylemler isimli dosya ile gecici isimli dosyayanın içeriğini değiştirir
+    rename("dosya.txt", "eylemler.txt");
 
-    printf("Eylem basariyla degistirildi!");
+    printf("gorev basariyla degistirildi!\n");
 }
-
-
 void gorevler(){
     char c;
     fileAdres = fopen("eylemler.txt", "r");
@@ -85,11 +85,11 @@ void gorevler(){
 }
 
 void silme(){
-   fileAdres = fopen("eylemler.txt", "w");  // dosyayı yazma komutuyla açtım
+   fileAdres = fopen("eylemler.txt", "w");  // dosyayı yazma momutuyla açtım
     if(fileAdres != NULL){
         fclose(fileAdres); // dosyayı kapattığımda dosya içeriği silinir
         printf("Gorevler silindi \n");
     }
     else
-        printf("Dosya acilamadi\n"); // dosya açılmazsa bu mesaj ekrana yazılacak
+        printf("Dosya acilamadi\n"); // dosya açılmazsa bu hatra mesaj ekrana yazılacak
 }
