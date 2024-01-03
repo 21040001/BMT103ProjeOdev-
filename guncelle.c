@@ -19,15 +19,19 @@ void guncelle() {
     printf("Lutfen yeni gorev girin:\n ");
     scanf("%s", yeni_eylem);//değişkenlere değer atadık
 
-    while (fgets(satir, sizeof(satir), dosya) != NULL) {//eylemler dosyasındaki değerleri satır adındaki diziye girdik
-        sscanf(satir, "%d:%d => %s\n]", &dsaat, &ddakika, deylem);
-        if (saat == dsaat && dakika == ddakika) {
-           fprintf(geciciDosya, "%d:%d => %s\n", saat, dakika, yeni_eylem);
-        } else {
-           fprintf(geciciDosya, "%d:%d => %s\n", dsaat, ddakika, deylem);
-        }
-    }     //burada değişiklerle birlikte verileri geçici dosyaya kaydettim
+   while (!feof(dosya)) {//fonksiyonun sonunu ulaşıp ulaşmadığına baktım
+        fgets(satir, sizeof(satir), dosya);//eylemler dosyasındaki verileri satır dizisine aktardık
+        if (!feof(dosya)) {
+            sscanf(satir, "%d:%d => %s\n", &dsaat, &ddakika, deylem);
+            if (saat == dsaat && dakika == ddakika) {
+                fprintf(geciciDosya, "%d:%d => %s\n", saat, dakika, yeni_eylem);//değişiklik yaptığımız eylemi dosyaya yazdırdım
 
+            } else {
+                fprintf(geciciDosya, "%d:%d => %s\n", dsaat, ddakika, deylem);//değişiklik yapmadığımız eylemleri dosyaya yazdırdım
+
+            }
+        }
+    }
     fclose(geciciDosya);
     fclose(dosya);//dosyaları kapattım
 
