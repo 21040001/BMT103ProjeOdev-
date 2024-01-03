@@ -8,7 +8,7 @@ void ekle();
 void guncelle();
 void gorevler();
 void silme();
-int main(){
+int main(){//fonksiyonları tanımladık
     int a;
     while (1){
     printf("*Isleminizi Seciniz*\n" );
