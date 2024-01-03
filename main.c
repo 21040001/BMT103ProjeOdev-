@@ -1,5 +1,9 @@
 #include <stdio.h>
-
+struct gorev{
+    int saat;
+    int dakika;
+    char eylem[30];
+};
 void ekle();
 void guncelle();
 void gorevler();
