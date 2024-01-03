@@ -12,7 +12,7 @@ int main(){
     printf("2 - Plan Guncelle\n");
     printf("3 - Plani Sil\n");
     printf("4 - Plani Goruntule\n");
-    printf("5 - Programi bitir\n");
+    printf("5 - Programi bitir\n");//burada fonksiyonlara sayı atadım
     scanf("%d", &a);
 
     switch (a) {
@@ -32,7 +32,7 @@ int main(){
             return 0;
         default:
             printf("Gecersiz deger girdiniz !!!!!\n");
-            break;
+            break;//burada girdiğimiz sayıya karşılık gelen fonksiyonu çağırdık
     }
     }
 
