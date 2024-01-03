@@ -36,8 +36,8 @@ void guncelle() {
         printf("Dosya acilamadi!");
         exit(1);
     }//dosya boş ise bunu bildiriyor
-    int yenisaat, yenidakika;
-    char yenieylem[100];
+    int dsaat, ddakika;
+    char deylem[100];
     char satir[100];
     int saat, dakika;
     char yeni_eylem[50];//değişkenleri ve dizileri tanımladık
@@ -51,11 +51,11 @@ void guncelle() {
     scanf("%s", yeni_eylem);//değişkenlere değer atadık
 
     while (fgets(satir, sizeof(satir), dosya) != NULL) {//eylemler dosyasındaki değerleri satır adındaki diziye girdik
-        sscanf(satir, "%d:%d => %s\n]", &yenisaat, &yenidakika, yenieylem);
-        if (saat == yenisaat && dakika == yenidakika) {
+        sscanf(satir, "%d:%d => %s\n]", &dsaat, &ddakika, deylem);
+        if (saat == dsaat && dakika == ddakika) {
            fprintf(geciciDosya, "%d:%d => %s\n", saat, dakika, yeni_eylem);
         } else {
-           fprintf(geciciDosya, "%d:%d => %s\n", yenisaat, yenidakika, yenieylem);
+           fprintf(geciciDosya, "%d:%d => %s\n", dsaat, ddakika, deylem);
         }
     }     //burada değişiklerle birlikte verileri geçici dosyaya kaydettim
 
