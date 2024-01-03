@@ -1,39 +1,38 @@
 void guncelle() {
-    FILE *geciciDosya = fopen("gecici.txt", "w");//buarada yeni bir dosya açtı
-    FILE *dosya = fopen("eylemler.txt", "r");//burda eylemler dosyasını okudu
-    if (dosya == NULL) {//dosya açılmasa bunu bize bildiriyor
+    FILE *geciciDosya = fopen("dosya.txt", "w");//dosya adlı dosya açtı
+    FILE *dosya = fopen("eylemler.txt", "r");//eylemler dosyasını okudu
+    if (dosya == NULL) {
         printf("Dosya acilamadi!");
         exit(1);
-    }
-    int yenisaat, yenidakika;
-    char yenieylem[100];
+    }//dosya boş ise bunu bildiriyor
+    int dsaat, ddakika;
+    char deylem[100];
     char satir[100];
     int saat, dakika;
-    char yeni_eylem[50];//kulancağımız diziler ve değişkenleri tanımladım
+    char yeni_eylem[50];//değişkenleri ve dizileri tanımladık
 
-    printf("Lutfen degistirmek istediginiz eylemin saatini girin: ");
+    printf("Lutfen degistirmek istediginiz gorevin saatini girin:\n ");
     scanf("%d", &saat);
-    printf("Lutfen degistirmek istediginiz eylemin dakikasini girin: ");
+    printf("Lutfen degistirmek istediginiz gorevin dakikasini girin:\n ");
     scanf("%d", &dakika);
 
-    printf("Lutfen yeni eylem girin: ");
-    scanf("%s", yeni_eylem);//burada değişkenlere değer atadım
+    printf("Lutfen yeni gorev girin:\n ");
+    scanf("%s", yeni_eylem);//değişkenlere değer atadık
 
-    while (fgets(satir, sizeof(satir), dosya) != NULL) {
-        sscanf(satir, "%d:%d => %[^\n]", &yenisaat, &yenidakika, yenieylem);//buarada eylemler dosyasındaki değerleri satır dizisine aktardık
-        if (saat == yenisaat && dakika == yenidakika) {
-            fprintf(geciciDosya, "%d:%d => %s\n", saat, dakika, yeni_eylem);
+    while (fgets(satir, sizeof(satir), dosya) != NULL) {//eylemler dosyasındaki değerleri satır adındaki diziye girdik
+        sscanf(satir, "%d:%d => %s\n]", &dsaat, &ddakika, deylem);
+        if (saat == dsaat && dakika == ddakika) {
+           fprintf(geciciDosya, "%d:%d => %s\n", saat, dakika, yeni_eylem);
         } else {
-            fprintf(geciciDosya, "%d:%d => %s\n", yenisaat, yenidakika, yenieylem);
-            break;//burada değişiklerle birlikte verileri geçici dosyaya kaydettim
+           fprintf(geciciDosya, "%d:%d => %s\n", dsaat, ddakika, deylem);
         }
-    }
+    }     //burada değişiklerle birlikte verileri geçici dosyaya kaydettim
 
     fclose(geciciDosya);
-    fclose(dosya);//dosyaları kapatttım
+    fclose(dosya);//dosyaları kapattım
 
     remove("eylemler.txt");
-    rename("gecici.txt", "eylemler.txt");//eylemler isimli dosya ile gecici isimli dosyayanın içeriğini değiştirir
+    rename("dosya.txt", "eylemler.txt");// dasya adındaki dosyadaki  verileri eylemler adındaki dosyaya attım
 
-    printf("Eylem basariyla degistirildi!");
+    printf("gorev basariyla degistirildi!\n");
 }
