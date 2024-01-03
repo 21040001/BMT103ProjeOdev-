@@ -6,12 +6,12 @@
 struct gorev{
     int saat;
     int dakika;
-    char eylem[30];
+    char eylem[30];//değişkenleri ve dizileri tanımladım
 };
 FILE * fileAdres;
 void ekle(){
     struct gorev gorev1;
-    fileAdres = fopen("eylemler.txt","a+");
+    fileAdres = fopen("eylemler.txt","a+");//eylemler dosyasını açtım
 
     printf("Lutfen gorev saati giriniz!! \n");
     scanf("%d", &gorev1.saat);
@@ -19,14 +19,14 @@ void ekle(){
     scanf("%d", &gorev1.dakika);
     printf("Lutfen gorevi giriniz!!  \n");
 
-    scanf("%s",gorev1.eylem);
+    scanf("%s",gorev1.eylem);//değişkenlere değer atadım
 
     if (fileAdres == NULL){
         printf("Dosya olusturulamadi, uzgunuz !!");
         exit(1);
-    }
-    fprintf(fileAdres," %d:%d => %s \n ",gorev1.saat,gorev1.dakika,gorev1.eylem);
-    fclose(fileAdres);
+    }//dosya boş ise bildiriyor
+    fprintf(fileAdres," %d:%d => %s \n ",gorev1.saat,gorev1.dakika,gorev1.eylem);//değişkenleri eylemler dosyasının içine yazdırdım
+    fclose(fileAdres);//dosyayı kapattım
 
 }
 void guncelle() {
