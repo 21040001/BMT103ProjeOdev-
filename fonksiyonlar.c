@@ -3,12 +3,7 @@
 #include <process.h>
 #include <stdlib.h>
 
-typedef struct File File;
-struct gorev{
-    int saat;
-    int dakika;
-    char eylem[30];
-};
+
 FILE * fileAdres;
 void ekle(){
     struct gorev gorev1;
