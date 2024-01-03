@@ -30,17 +30,17 @@ void ekle(){
 
 }
 void guncelle() {
-    FILE *geciciDosya = fopen("dosya.txt", "w");
-    FILE *dosya = fopen("eylemler.txt", "r");
+    FILE *geciciDosya = fopen("dosya.txt", "w");//dosya adlı dosya açtı
+    FILE *dosya = fopen("eylemler.txt", "r");//eylemler dosyasını okudu
     if (dosya == NULL) {
         printf("Dosya acilamadi!");
         exit(1);
-    }
+    }//dosya boş ise bunu bildiriyor
     int yenisaat, yenidakika;
     char yenieylem[100];
     char satir[100];
     int saat, dakika;
-    char yeni_eylem[50];
+    char yeni_eylem[50];//değişkenleri ve dizileri tanımladık
 
     printf("Lutfen degistirmek istediginiz gorevin saatini girin:\n ");
     scanf("%d", &saat);
@@ -48,40 +48,40 @@ void guncelle() {
     scanf("%d", &dakika);
 
     printf("Lutfen yeni gorev girin:\n ");
-    scanf("%s", yeni_eylem);
+    scanf("%s", yeni_eylem);//değişkenlere değer atadık
 
-    while (fgets(satir, sizeof(satir), dosya) != NULL) {
+    while (fgets(satir, sizeof(satir), dosya) != NULL) {//eylemler dosyasındaki değerleri satır adındaki diziye girdik
         sscanf(satir, "%d:%d => %s\n]", &yenisaat, &yenidakika, yenieylem);
         if (saat == yenisaat && dakika == yenidakika) {
            fprintf(geciciDosya, "%d:%d => %s\n", saat, dakika, yeni_eylem);
         } else {
            fprintf(geciciDosya, "%d:%d => %s\n", yenisaat, yenidakika, yenieylem);
         }
-    }
+    }     //burada değişiklerle birlikte verileri geçici dosyaya kaydettim
 
     fclose(geciciDosya);
-    fclose(dosya);
+    fclose(dosya);//dosyaları kapattım
 
     remove("eylemler.txt");
-    rename("dosya.txt", "eylemler.txt");
+    rename("dosya.txt", "eylemler.txt");// dasya adındaki dosyadaki  verileri eylemler adındaki dosyaya attım
 
     printf("gorev basariyla degistirildi!\n");
 }
 void gorevler(){
     char c;
-    fileAdres = fopen("eylemler.txt", "r");
+    fileAdres = fopen("eylemler.txt", "r");//eylemler dosyasını açtım
     if (fileAdres == NULL)
     {
         printf("Dosya açılamadı!\n");
         exit(1);
-    }
-    c = fgetc(fileAdres);
+    }//dosya boşsa bunu bize bildiriyor
+    c = fgetc(fileAdres);//eylemler dosyasındaki verileri değişkene atadım
     while (c != EOF)
     {
         printf ("%c", c);
         c = fgetc(fileAdres);
-    }
-    fclose(fileAdres);
+    }//değikendeki verileri döngü yardımı ile ekrana yazdırdım
+    fclose(fileAdres);//dosyayı kapattım
 }
 
 void silme(){
