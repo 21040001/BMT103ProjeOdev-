@@ -29,6 +29,7 @@ void ekle(){
     fclose(fileAdres);//dosyayı kapattım
 
 }
+
 void guncelle() {
     FILE *geciciDosya = fopen("dosya.txt", "w");//dosya adlı dosya açtı
     FILE *dosya = fopen("eylemler.txt", "r");//eylemler dosyasını okudu
@@ -50,15 +51,19 @@ void guncelle() {
     printf("Lutfen yeni gorev girin:\n ");
     scanf("%s", yeni_eylem);//değişkenlere değer atadık
 
-    while (fgets(satir, sizeof(satir), dosya) != NULL) {//eylemler dosyasındaki değerleri satır adındaki diziye girdik
-        sscanf(satir, "%d:%d => %s\n]", &dsaat, &ddakika, deylem);
-        if (saat == dsaat && dakika == ddakika) {
-           fprintf(geciciDosya, "%d:%d => %s\n", saat, dakika, yeni_eylem);
-        } else {
-           fprintf(geciciDosya, "%d:%d => %s\n", dsaat, ddakika, deylem);
-        }
-    }     //burada değişiklerle birlikte verileri geçici dosyaya kaydettim
+   while (!feof(dosya)) {
+        fgets(satir, sizeof(satir), dosya);
+        if (!feof(dosya)) {
+            sscanf(satir, "%d:%d => %s\n", &yenisaat, &yenidakika, yenieylem);
+            if (saat == yenisaat && dakika == yenidakika) {
+                fprintf(geciciDosya, "%d:%d => %s\n", saat, dakika, yeni_eylem);
 
+            } else {
+                fprintf(geciciDosya, "%d:%d => %s\n", yenisaat, yenidakika, yenieylem);
+
+            }
+        }
+    }
     fclose(geciciDosya);
     fclose(dosya);//dosyaları kapattım
 
