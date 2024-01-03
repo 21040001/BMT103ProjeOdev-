@@ -32,9 +32,9 @@ void ekle(){
 
 }
 void guncelle() {
-    FILE *geciciDosya = fopen("dosya.txt", "w");
-    FILE *dosya = fopen("eylemler.txt", "r");
-    if (dosya == NULL) {
+    FILE *geciciDosya = fopen("gecici.txt", "w");//buarada yeni bir dosya açtı
+    FILE *dosya = fopen("eylemler.txt", "r");//burda eylemler dosyasını okudu
+    if (dosya == NULL) {//dosya açılmasa bunu bize bildiriyor
         printf("Dosya acilamadi!");
         exit(1);
     }
@@ -42,33 +42,36 @@ void guncelle() {
     char yenieylem[100];
     char satir[100];
     int saat, dakika;
-    char yeni_eylem[50];
+    char yeni_eylem[50];//kulancağımız diziler ve değişkenleri tanımladım
 
-    printf("Lutfen degistirmek istediginiz gorevin saatini girin:\n ");
+    printf("Lutfen degistirmek istediginiz eylemin saatini girin: ");
     scanf("%d", &saat);
-    printf("Lutfen degistirmek istediginiz gorevin dakikasini girin:\n ");
+    printf("Lutfen degistirmek istediginiz eylemin dakikasini girin: ");
     scanf("%d", &dakika);
 
-    printf("Lutfen yeni gorev girin:\n ");
-    scanf("%s", yeni_eylem);
+    printf("Lutfen yeni eylem girin: ");
+    scanf("%s", yeni_eylem);//burada değişkenlere değer atadım
 
     while (fgets(satir, sizeof(satir), dosya) != NULL) {
-        sscanf(satir, "%d:%d => %s\n]", &yenisaat, &yenidakika, yenieylem);
+        sscanf(satir, "%d:%d => %[^\n]", &yenisaat, &yenidakika, yenieylem);//buarada eylemler dosyasındaki değerleri satır dizisine aktardık
         if (saat == yenisaat && dakika == yenidakika) {
-           fprintf(geciciDosya, "%d:%d => %s\n", saat, dakika, yeni_eylem);
+            fprintf(geciciDosya, "%d:%d => %s\n", saat, dakika, yeni_eylem);
         } else {
-           fprintf(geciciDosya, "%d:%d => %s\n", yenisaat, yenidakika, yenieylem);
+            fprintf(geciciDosya, "%d:%d => %s\n", yenisaat, yenidakika, yenieylem);
+            break;//burada değişiklerle birlikte verileri geçici dosyaya kaydettim
         }
     }
 
     fclose(geciciDosya);
-    fclose(dosya);
+    fclose(dosya);//dosyaları kapatttım
 
     remove("eylemler.txt");
-    rename("dosya.txt", "eylemler.txt");
+    rename("gecici.txt", "eylemler.txt");//eylemler isimli dosya ile gecici isimli dosyayanın içeriğini değiştirir
 
-    printf("gorev basariyla degistirildi!\n");
+    printf("Eylem basariyla degistirildi!");
 }
+
+
 void gorevler(){
     char c;
     fileAdres = fopen("eylemler.txt", "r");
